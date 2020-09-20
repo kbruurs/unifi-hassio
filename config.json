@@ -1,0 +1,34 @@
+{
+  "name": "Unifi wifi ticket",
+  "version": "0.2.16",
+  "slug": "unifiticketsystem",
+  "description": "Create tickets to use for guests",
+  "url": "https://github.com/issacg/hassio-addon-devcontainer",
+  "startup": "once",
+  "boot": "manual",
+  "options": {
+    "ControllerURL": "example.com",
+    "Login": 
+    { "Username": "user", "Password": "123456" }
+    ,
+    "Port": 8443,
+    "Version": "v5",
+    "SiteID": "default",
+    "ValidSSL": true
+  }
+  ,
+  "schema": {
+    "ControllerURL": "str",
+    "Login": 
+      { "Username": "str", "Password": "str" }
+    ,    
+    "Port": "int",
+    "Version": "str",
+    "SiteID": "str",
+    "ValidSSL": "bool"
+  }, 
+  "arch": ["amd64", "armv7", "armhf", "i386" , "aarch64"],
+  "ports": {
+		"8765/tcp": 8765
+	}
+}

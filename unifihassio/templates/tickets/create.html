@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Register{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <label for="quantity">Quantity</label>
+    <input type="number" name="quantity" id="quantity" min="1" max="5" required>
+    <label for="duration">Duration (days)</label>
+    <input type="number" name="duration" id="duration" min="1" max="20" required>
+    <input type="submit" value="Create">
+  </form>
+{% endblock %}

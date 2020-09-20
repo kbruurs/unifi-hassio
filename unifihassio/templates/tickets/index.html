@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Tickets{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<table style="width:100%">
+  <tr>
+    <th>ID</th>
+    <th>Code</th>
+    <th>Used</th>
+  </tr>
+{% for voucher in vouchers %}
+  <tr>
+    <td>{{voucher.get("_id")}}</td>
+    <td>{{voucher.get("code")}}</td>
+    <td>{{voucher.get("used")}}</td>
+  </tr>
+{% endfor %}
+</table>
+{% endblock %}
