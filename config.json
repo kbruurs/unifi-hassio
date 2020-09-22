@@ -6,6 +6,7 @@
   "url": "https://github.com/issacg/hassio-addon-devcontainer",
   "startup": "once",
   "boot": "manual",
+  "ingress": true,
   "options": {
     "ControllerURL": "example.com",
     "Login": 
@@ -29,6 +30,6 @@
   }, 
   "arch": ["amd64", "armv7", "armhf", "i386" , "aarch64"],
   "ports": {
-		"8765/tcp": 8765
+		"8099/tcp": null
 	}
 }

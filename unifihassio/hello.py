@@ -1,3 +1,20 @@
+class PrefixMiddleware(object):
+
+    def __init__(self, app, prefix=''):
+        self.app = app
+        self.prefix = prefix
+
+    def __call__(self, environ, start_response):
+
+        if environ['PATH_INFO'].startswith(self.prefix):
+            environ['PATH_INFO'] = environ['PATH_INFO'][len(self.prefix):]
+            environ['SCRIPT_NAME'] = self.prefix
+            return self.app(environ, start_response)
+        else:
+            start_response('404', [('Content-Type', 'text/plain')])
+            return ["This url does not belong to the app.".encode()]
+
+
 from pyunifi.controller import Controller
 from flask import Flask
 from flask import jsonify
@@ -6,7 +23,8 @@ from flask import (
     Blueprint, flash, g, redirect, render_template, request, url_for
 )
 app = Flask(__name__)
-app.secret_key = b'ewfsdfwefs4d56f4sa1bre5g4gw'
+app.secret_key = 'ewfsdfwefs4d56f4sa1bre5g4gw'
+app.wsgi_app = PrefixMiddleware(app.wsgi_app, prefix='%%ingress_entry%%')
 
 def connect_controller():
     with open("/data/options.json", "r") as read_file:
@@ -16,7 +34,9 @@ def connect_controller():
 
 @app.route('/')
 def hello_world():
-        return redirect(url_for('tickets')) 
+    c = connect_controller()
+    vouchers =  c.list_vouchers()
+    return render_template('tickets/index.html', vouchers=vouchers)
 
 @app.route('/aps')
 def aps():
@@ -63,3 +83,6 @@ def create_tickets():
             flash(error)
 
     return render_template('tickets/create.html')
+
+
+
