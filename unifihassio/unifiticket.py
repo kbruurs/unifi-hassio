@@ -5,6 +5,7 @@ import json
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, url_for
 )
+
 app = Flask(__name__)
 app.secret_key = 'ewfsdfwefs4d56f4sa1bre5g4gw'
 

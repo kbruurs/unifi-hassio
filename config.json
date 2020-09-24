@@ -1,6 +1,6 @@
 {
   "name": "Unifi wifi ticket",
-  "version": "0.2.16",
+  "version": "0.2.17",
   "slug": "unifiticketsystem",
   "description": "Create tickets to use for guests",
   "url": "https://github.com/issacg/hassio-addon-devcontainer",
@@ -30,6 +30,8 @@
   }, 
   "arch": ["amd64", "armv7", "armhf", "i386" , "aarch64"],
   "ports": {
-		"8099/tcp": null
+    "8099/tcp": null,
+    "8765/tcp": 8765
+   
 	}
 }

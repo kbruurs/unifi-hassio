@@ -16,7 +16,7 @@ RUN apk add --no-cache nginx
 
 RUN pip install Flask
 RUN pip install pyunifi
-
+RUN pip install gunicorn
 
 
 

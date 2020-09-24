@@ -2,8 +2,7 @@
 declare ingress_entry
 ingress_entry=$(bashio::addon.ingress_entry)
 
-sed -i "s#%%ingress_entry%%#${ingress_entry}#g" /hello.py
+sed -i "s#%%ingress_entry%%#${ingress_entry}#g" /unifiticket.py
 
-echo Starting http server
-export FLASK_APP=hello.py
-flask run --host=0.0.0.0 --port=8765
+echo Starting gunicorn server
+gunicorn --bind 0.0.0.0:8765 wsgi:app
