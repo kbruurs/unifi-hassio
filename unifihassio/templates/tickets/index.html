@@ -1,22 +1,91 @@
-{% extends 'base.html' %}
+{% extends 'index.html' %}
 
-{% block header %}
-  <h1>{% block title %}Tickets{% endblock %}</h1>
-{% endblock %}
 
 {% block content %}
-<table style="width:100%">
-  <tr>
-    <th>ID</th>
-    <th>Code</th>
-    <th>Used</th>
-  </tr>
-{% for voucher in vouchers %}
-  <tr>
-    <td>{{voucher.get("_id")}}</td>
-    <td>{{voucher.get("code")}}</td>
-    <td>{{voucher.get("used")}}</td>
-  </tr>
-{% endfor %}
-</table>
+<!-- Page Heading -->
+
+<h1 class="h3 mb-2 text-gray-800">Unifi Tickets</h1>
+
+
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">All Unifi tickets</h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Code</th>
+                      <th>Used</th>
+                      <th>Duration</th>
+                      <th>Status</th>
+                      <th>Create time</th>
+					  <th>Delete</th>
+
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>Code</th>
+                      <th>Used</th>
+                      <th>Duration</th>
+                      <th>Status</th>
+                      <th>Create time</th>
+					  <th>Delete</th>
+
+                    </tr>
+                  </tfoot>
+                  <tbody>
+					{% for voucher in vouchers %}
+					  <tr id="{{voucher.get("_id")}}">
+						<td>{{voucher.get("code")}}</td>
+						<td>{{voucher.get("used")}}</td>
+						<td>{{voucher.get("duration")}}</td>
+						<td>{{voucher.get("status")}}</td>
+						<td>{{voucher.get("create_time")}}</td>
+						<td><button class='btn btn-sm btn-danger deleteTicket' data-id='{{voucher.get("_id")}}'>Delete</button></td>
+					  </tr>
+					{% endfor %}
+				  </tbody>
+				</table>
+			  </div>
+			</div>
+		  </div>
 {% endblock %}
+
+{% block bottom_script %}
+<script type="text/javascript">
+// Call the dataTables jQuery plugin
+$(document).ready(function() {
+  var table = $('#dataTable').DataTable();
+  
+	  // Delete record
+				  $('#dataTable tbody').on('click','.deleteTicket',function(){
+					 var id = $(this).data('id');
+
+					 var deleteConfirm = confirm("Are you sure?");
+					 if (deleteConfirm == true) {
+						// AJAX request
+						$.ajax({
+						  url: '{{ url_for('delete_voucher') }}',
+						  type: 'post',
+						  data: {id: id},
+						  success: function(response){
+							 if(response.status == "success"){
+								table.row('#'+id).remove().draw();
+							 }else{
+								alert("Invalid ID."+response.status);
+							 }
+						  }
+						});
+					 } 
+
+				  });
+  
+  
+
+});
+</script>
+{% endblock %}
+

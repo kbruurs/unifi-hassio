@@ -1,10 +1,10 @@
-{% extends 'base.html' %}
+{% extends 'index.html' %}
 
-{% block header %}
-  <h1>{% block title %}Register{% endblock %}</h1>
-{% endblock %}
 
 {% block content %}
+<!-- Page Heading -->
+<h1 class="h3 mb-2 text-gray-800">Create Tickets</h1>
+
   <form method="post">
     <label for="quantity">Quantity</label>
     <input type="number" name="quantity" id="quantity" min="1" max="5" required>

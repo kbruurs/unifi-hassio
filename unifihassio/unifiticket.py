@@ -10,19 +10,13 @@ app = Flask(__name__)
 app.secret_key = 'ewfsdfwefs4d56f4sa1bre5g4gw'
 
 def connect_controller():
-    with open("/data/options.json", "r") as read_file:
+    with open('/data/options.json', "r") as read_file:
         data = json.load(read_file)
 
     return Controller(data["ControllerURL"], data["Login"]["Username"], data["Login"]["Password"],data["Port"],data["Version"],data["SiteID"],data["ValidSSL"])
 
 @app.route('/')
-def hello_world():
-    c = connect_controller()
-    vouchers =  c.list_vouchers()
-    return render_template('tickets/index.html', vouchers=vouchers)
-
-@app.route('/tickets')
-def tickets():
+def main_page():
     c = connect_controller()
     vouchers =  c.list_vouchers()
     return render_template('tickets/index.html', vouchers=vouchers)
@@ -49,5 +43,14 @@ def create_tickets():
 
     return render_template('tickets/create.html')
 
+@app.route("/_delete_voucher", methods=('GET', 'POST'))
+def delete_voucher():
+    if request.method == 'POST':
 
+        id = request.form['id']
+        c = connect_controller()
+        c.delete_voucher(id)
+        return jsonify(status="success")
+        
+    return jsonify(status="error")
 
