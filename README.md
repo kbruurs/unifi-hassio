@@ -11,8 +11,15 @@ Make sure to fill in the configuration with the url/ip address of your unifi con
 
 ### Credits
 Using: 
+
 PyUnifi https://github.com/finish06/pyunifi
+
 Flask https://palletsprojects.com/p/flask/
+
 Jinja https://palletsprojects.com/p/jinja/
+
 Gunicorn https://gunicorn.org/
+
 NGINX https://nginx.org/
+
+SB Admin-2 https://github.com/StartBootstrap/startbootstrap-sb-admin-2
