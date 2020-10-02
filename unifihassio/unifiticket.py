@@ -34,7 +34,7 @@ def create_tickets():
                 error = 'Incorrect duration.'
             if error is None:
                 c = connect_controller()
-                c.create_voucher(int(quantity), 0, int(duration)*60*60*24)
+                c.create_voucher(int(quantity), 0, int(duration)*60*24)
                 flash('Ticket(s) created')
                 return render_template('tickets/create.html')
 
