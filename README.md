@@ -3,6 +3,10 @@
 ### Summary
 A simple add-on to create tickets using the Unifi ticket system. 
 
+Copy all files to your hassio installation in the addons folder (in a new folder called unifi_tikets). More information: https://developers.home-assistant.io/docs/add-ons/tutorial/
+
+Step two is go to you Home assistant and go to add-ons. Click add-on store and then refresh repositories. The add-on should now show up and you should be able to install it. Fill in the configuration before starting the add-on.
+
 The add-on is Ingress compatible so runs from wherever you're able to connect to your installation.
 
 ### Usage
